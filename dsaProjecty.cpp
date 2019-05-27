@@ -1,14 +1,10 @@
 /*
 DATA STRUCTURES AND ALGORITHMS
 (FINAL PROJECT)
-
 Submitted To: Sir Tanveer
-
 Submitted by:
 Abdullah Ahsan (SP18-BCS-010)
 Faizan Ullah (SP18-BCS-000)
-
-
 *Create new Category
 *Do all the functions of add,delete,display
 *Maybe insert at specific position at the time user enters if by checking it's place...so that when using search algorithms we can search easily at it's already been sorted...and give the reason
@@ -141,6 +137,49 @@ public:
 		}
 		return temp->data;
 	}
+	
+	string searchWord(){
+	system("CLS");
+	string searchedWord;
+	if(head == NULL){
+		cout<<"THE LIST IS EMPTY\n";
+	}
+	else{
+		node* temp = new node;
+		temp = head;
+		cout<<"ENTER THE WORD YOU WANT TO SEARCH: \n";
+		cin>>searchedWord;
+		int searchIndex = -1;
+		int arrayofIndex[50];
+		
+		int i = 1;
+		while (temp != NULL) {
+			if(temp->data == searchedWord){
+				searchIndex++;
+				arrayofIndex[searchIndex] = i;
+				temp = temp->next;
+				i++;
+			}
+			else{
+				temp=temp->next;
+				i++;
+			}
+			
+			
+		}
+		if(searchIndex == -1){
+			cout<<"THE GIVEN WORD "<<searchedWord<<" DOES NOT EXIST\n";
+		}
+		else{
+			cout<<"THE WORD '"<<searchedWord<<"' EXISTS AT THE FOLLOWING POSITION(S):\n";
+			for(int i = 0; i<=searchIndex; i++){
+				cout<<arrayofIndex[i]<<"\t";
+			}
+			cout<<"\n";
+		}
+		return searchedWord;
+	}
+}
 };
 //--------------------------------------------------Initialization of Functions-------------------------------------------
 void player();
@@ -487,17 +526,39 @@ void userEngagement(LinkedList give) {
 		cin >> ui3;
 		switch (ui3)
 		{
-		case 1:
+		case 1:{
 			give.display();
 			cout << endl;
 			cout << "------------------";
 			break;
-		case 2:
-		case 3:
-		case 4:
-		default:
+		}
+		case 2:{
+			string theWord;
+			cout<<"Enter the Word that you want to Add: ";
+			cin>>theWord;
+			give.insertEnd(theWord);
+			cout<<endl;
+			break;
+		}
+		case 3:{
+			give.display();
+			cout << endl;
+			int pos;
+			cout<<"Enter the position of the word that you want to delete: \n";
+			cin>>pos;
+			give.deleteAt(pos-1);
+			cout<<endl;
+			break;
+		}
+		case 4:{
+			give.searchWord();
+			cout<<endl;
+			break;
+		}
+		default:{
 			cout << "\nPlease choose from the given options.";
 			break;
+		}
 		}
 	} while (ui3 != 0);
 }
