@@ -143,6 +143,7 @@ public:
 	string searchedWord;
 	if(head == NULL){
 		cout<<"THE LIST IS EMPTY\n";
+		return "\\N";
 	}
 	else{
 		node* temp = new node;
